@@ -20,7 +20,49 @@
                     <a href="contato.html"><li>Contato</li></a>
                 </ul>
             </Nav>
+            <!--Meu formulario-->
+    <h2> Façaseu Cadastro e agende seu horáio</h2>
 
-            
+<form>
+    <label for="Pname">Primeiro Nome:</label><br>
+    <input type="text" id="Pname" name="Pname"><br>
+    <label for="Sname">Sobrenome:</label><br>
+    <input type="text" id="Sname" name="Sname"><br>
+    <label for="Email">E mail:</label><br>
+    <input type="text" id="Email" name="Email"><br>
+    <label for="cpf">CPF:</label><br>
+    <input type="text" id="cpf" name="cpf"><br>
+    <label for="End">Enderço:</label>
+    <label for="num">Numero:</label><br>
+    <input type="text" id="End" name="End">
+    <input type="text" id="num" name="num"><br>
+    <label for="tel">Telefone:</label><br>
+    <input type="text" id="tel" name="tel"><br>
+<!--Caixas de seleção-->
+<h3>Escolha o serviço que você deseja</h3>
+
+    <input type="checkbox" id="make" name="make" value="Maquiagem">
+    <label for="make">Maquiagem</label><br>
+    <input type="checkbox" id="pente" name="pente" value="Penteados">
+    <label for="pente">Penteados</label><br>
+    <input type="checkbox" id="dataesp" name="dataesp" value="Datas Especiais">
+    <label for="dataesp"> Datas Especiais</label> 
+    
+    <!--Botões de rádio-->
+    <input type="radio" id="casamento" name="datas_especiais" value="HTML">
+    <label for="casamento">Casamento</label>
+    <input type="radio" id="formaturas" name="datas_especiais" value="">
+    <label for="formaturas">Formaturas</label>
+    <input type="radio" id="debud" name="datas_especiais" value="Debutantes">
+    <label for="debud">Debutantes</label><br>
+    <!--  elemento textarea -->
+    <h4>Fale conosco!!</h4><br>
+        <textarea name="message" rows="10" cols="40">
+            Não encontou o que gostaria!!
+            Deixi-nos uma menssagem que entraremos em contato.
+        </textarea> <br>
+        <input type="submit" value="Enviar">
+
+</form>
 </body>
 </html>
