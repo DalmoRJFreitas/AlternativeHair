@@ -30,9 +30,9 @@ header {
 }
 
 nav {
-    flex: 2; // Ocupará 2 unidades de espaço flex para balancear com o logo
-    background: $primary-color-2;
-    padding: 10px;
+    flex: 0,1; // Ocupará 2 unidades de espaço flex para balancear com o logo
+    background: $primary-color-1;
+    padding: 5px;
   ul {
     display: flex; // Itens lado a lado no nav
     list-style: none;
@@ -67,7 +67,7 @@ nav {
 form {
   max-width: 600px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 30px;
   border: 1px solid #ddd;
   border-radius: 5px;
   background: $primary-color-4;
