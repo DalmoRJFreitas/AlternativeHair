@@ -83,7 +83,7 @@ form input[type=submit] {
   border-radius: 5px;
 }
 form input[type=submit]:hover {
-  background: rgb(166.9230769231, 3.0769230769, 93.0769230769);
+  background: #a7035d;
 }
 
 @media (max-width: 768px) {
@@ -136,6 +136,4 @@ form input[type=submit]:hover {
   .container {
     width: 60%;
   }
-}
-
-/*# sourceMappingURL=estilo.css.map */
+}/*# sourceMappingURL=estilo.css.map */
