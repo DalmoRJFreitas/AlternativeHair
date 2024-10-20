@@ -159,4 +159,10 @@ form input[type=submit]:hover {
   vertical-align: top;
 }
 
+.carousel-item img {
+  width: 100%;
+  height: 655px; /* Ajuste a altura conforme necessário */
+  object-fit: cover;
+}
+
 /*# sourceMappingURL=estilo.css.map */
