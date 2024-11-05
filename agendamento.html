@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/estilo.css">
+    <title>Agendamento</title>
+</head>
+<body>
+    <header>
+        <h1><img id="logo" src="assets/img-ph/logo-clean50x50.png" alt="Logo Alternative Hair"></h1>
+        <nav>
+            <ul>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="penteados.html">Penteados</a></li>
+                <li><a href="agendamento.html">Agendamento</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Formulário de Cadastro -->
+    <main>
+        <section class="agendamento">
+            <h1>Agende seu horário</h1>
+            
+            <form action="/agendar" method="POST">
+              <!-- Seleção de Serviços -->
+              <label for="servico">Escolha o Serviço</label>
+              <select name="servico" id="servico">
+                <option value="corte">Corte de Cabelo - R$50</option>
+                <option value="manicure">Manicure - R$30</option>
+                <option value="pedicure">Pedicure - R$40</option>
+              </select>
+        
+              <!-- Seleção de Data e Hora -->
+              <label for="data">Escolha a Data</label>
+              <input type="date" id="data" name="data">
+        
+              <label for="hora">Escolha o Horário</label>
+              <select name="hora" id="hora">
+                <option value="11:00">07:00</option>
+                <option value="11:00">08:00</option>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="11:00">12:00</option>
+                <option value="11:00">13:00</option>
+                <option value="11:00">14:00</option>
+                <option value="11:00">15:00</option>
+                <option value="11:00">16:00</option>
+                <option value="11:00">17:00</option>
+                <option value="11:00">18:00</option>
+                <option value="11:00">19:00</option>
+              </select>
+        
+              <!-- Dados Pessoais -->
+              <label for="nome">Seu Nome</label>
+              <input type="text" id="nome" name="nome" required>
+        
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" name="telefone" required>
+        
+              <button type="submit">Confirmar Agendamento</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Salão Beleza. Todos os direitos reservados.</p>
+        <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Contato</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
