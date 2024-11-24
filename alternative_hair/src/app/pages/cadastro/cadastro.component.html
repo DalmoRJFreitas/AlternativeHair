@@ -1,0 +1,124 @@
+<h2>Faça seu Cadastro e agende seu horário</h2>
+<form>
+  <div class="form-group">
+      <label for="Pname">Seu Nome</label><br>
+      <input type="text" id="Pname" name="Pname" required><br>
+  </div>
+
+  <div class="form-group">
+      <label for="Email">Email:</label><br>
+      <input type="text" id="Email" name="Email" required><br>
+  </div>
+
+  <div class="form-group">
+      <label for="tel">Telefone:</label><br>
+      <input type="text" id="tel" name="tel" required><br>
+  </div>
+
+  <div class="form-group">
+    <label for="data">Data:</label>
+    <input type="date" id="data" name="data" required>
+  </div><br>
+
+
+    <div class="form-group">
+      <label for="hora">Hora:</label><br>
+      <input type="time" id="hora" name="hora" required><br>
+    </div><br>
+
+
+  <!-- Caixas de seleção -->
+  <h3>Escolha o serviço que você deseja</h3>
+  <input type="checkbox" id="make" name="make" value="Maquiagem">
+  <label for="make">Maquiagem</label><br>
+
+  <input type="checkbox" id="pente" name="pente" value="Penteados">
+  <label for="pente">Penteados</label><br>
+
+  <input type="checkbox" id="dataesp" name="dataesp" value="Datas Especiais">
+  <label for="dataesp"> Datas Especiais</label> <br>
+
+  <!-- Botões de rádio -->
+  <h3>Datas Especiais</h3>
+  <input type="radio" id="casamento" name="datas_especiais" value="HTML">
+  <label for="casamento">Casamento</label><br>
+
+  <input type="radio" id="formaturas" name="datas_especiais" value="">
+  <label for="formaturas">Formaturas</label><br>
+
+  <input type="radio" id="debud" name="datas_especiais" value="Debutantes">
+  <label for="debud">Debutantes</label><br><br>
+
+  <!-- Elemento textarea -->
+  <h4>Fale Conosco!</h4><br>
+  <textarea name="message" rows="10" cols="40">Não encontrou o que gostaria? Deixe-nos uma mensagem e entraremos em contato.</textarea><br>
+
+  <input type="submit" value="Enviar">
+</form>
+
+
+
+<script>
+  const socket = io('http://localhost:3000'); // Conecta ao WebSocket no backend
+
+  // Seleciona o formulário
+  const form = document.querySelector('form');
+  const statusDiv = document.createElement('div'); // Div para mostrar status
+  document.body.appendChild(statusDiv); // Adiciona a div ao final do corpo do documento
+
+  // Conectar ao WebSocket para receber confirmações em tempo real
+  socket.on('/agendamento-confirmado', (data) => {
+    statusDiv.innerHTML += `<p>Agendamento confirmado para ${data.cliente} em ${data.data} às ${data.hora}!</p>`;
+  });
+
+  // Submeter formulário e confirmar agendamento
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Captura os dados do formulário
+    const cliente = document.getElementById('Pname').value;
+    const email = document.getElementById('Email').value;
+    const telefone = document.getElementById('tel').value;
+    const data = document.getElementById('data').value;
+    const hora = document.getElementById('hora').value;
+
+      // Validação básica para garantir que os campos não estão vazios
+      if (!data || !hora) {
+      statusDiv.innerHTML = '<p style="color: red;">Por favor, preencha todos os campos obrigatórios.</p>';
+      return;
+    }
+
+
+    // Captura os serviços selecionados
+    const servicos = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
+
+    // Captura o tipo de data especial
+    const dataEspecial = document.querySelector('input[name="datas_especiais"]:checked')?.value || 'Nenhuma';
+
+    // Captura a mensagem
+    const mensagem = document.querySelector('textarea[name="message"]').value;
+
+    // Enviar requisição POST para verificar e confirmar
+    try {
+      const response = await fetch('http://localhost:3000/confirmar-agendamento', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ cliente, email, endereco, telefone, data, hora, servicos, dataEspecial, mensagem }),
+      });
+
+      const result = await response.json();
+
+      if (result.sucesso) {
+        statusDiv.innerHTML = `<p style="color: green;">${result.message}</p>`;
+      } else {
+        statusDiv.innerHTML = `<p style="color: orange;">${result.message}</p>`;
+      }
+    } catch (error) {
+      console.error('Erro ao agendar:', error);
+      statusDiv.innerHTML = '<p style="color: red;">Erro ao processar seu agendamento. Tente novamente mais tarde.</p>';
+    }
+  });
+</script>
+

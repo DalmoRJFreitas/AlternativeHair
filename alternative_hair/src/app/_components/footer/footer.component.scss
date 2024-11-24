@@ -1,0 +1,50 @@
+
+// Variáveis de Breakpoints
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-extra-large: 1200px;
+
+// Paleta de Cores
+$primary-color-1: rgb(241, 121, 187); // Rosa forte
+$primary-color-2: #0D0C0C; // Preto
+$primary-color-3: #03588C; // Azul
+$primary-color-4: #F2F2F2; // Branco Suave
+
+
+.footer {
+  background: $primary-color-1; // Cor de fundo do footer
+  color: $primary-color-4; // Cor do texto
+  text-align: center;
+  padding: 0px 0; // Espaçamento interno
+  margin-bottom: auto; // Empurra o footer para o final quando há pouco conteúdo
+}
+
+
+.fixed-bottom {
+  background: $primary-color-1; // Cor de fundo do footer
+  color: $primary-color-4; // Cor do texto do footer
+  padding: 0px 0; // Espaçamento vertical interno do footer
+  padding-bottom: 0px; // Altura suficiente para o footer
+
+
+  footer {
+    text-align: center;
+
+    p {
+      margin: 0;
+      font-size: 0.9rem; // Ajuste de tamanho do texto
+      color: $primary-color-4;
+
+      a {
+        text-decoration: none;
+        color: $primary-color-3;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,48 @@
+
+// Variáveis de Breakpoints
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-extra-large: 1200px;
+
+// Paleta de Cores
+$primary-color-1: #f179bb; // Rosa forte
+$primary-color-2: #0D0C0C; // Preto
+$primary-color-3: #03588C; // Azul
+$primary-color-4: #F2F2F2; // Branco Suave
+
+
+.container-fluid {
+  flex: 0,1; // Ocupará 2 unidades de espaço flex para balancear com o logo
+  background: $primary-color-1;
+  padding: 10px;
+ul {
+  display: flex; // Itens lado a lado no nav
+  list-style: none;
+  padding: 0;
+  margin: 0 15px;
+  justify-content: flex-end; // Alinha o menu à direita
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin: 0 15px;
+
+    a {
+      text-decoration: none;
+      color: $primary-color-3;
+      font-weight: bold;
+
+      &:hover {
+        color: $primary-color-3;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+}

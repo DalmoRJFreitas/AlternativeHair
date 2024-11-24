@@ -1,0 +1,14 @@
+img {
+  max-width: 50%; /* Garante que a imagem nunca seja maior que o container */
+  height: auto; /* Mantém a proporção da imagem */
+  display: block; /* Remove o espaço extra abaixo da imagem */
+  margin: 0 auto; /* Centraliza a imagem horizontalmente */
+}
+
+.image-size {
+  /* Repetir as propriedades do código acima */
+  width: 300px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}

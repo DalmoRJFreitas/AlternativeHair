@@ -1,0 +1,172 @@
+
+/* You can add global styles to this file, and also import other style files */
+// Variáveis de Breakpoints
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-extra-large: 1200px;
+
+// Paleta de Cores
+$primary-color-1: #D90479; // Rosa forte
+$primary-color-2: #0D0C0C; // Preto
+$primary-color-3: #03588C; // Azul
+$primary-color-4: #F2F2F2; // Branco Suave
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+  background: $primary-color-4;
+}
+
+header {
+  background: $primary-color-1;
+  color: $primary-color-4;
+  padding: 10px;
+  text-align: left;
+  display: flex; // Adicionar flex para alinhamento horizontal
+  justify-content: space-between; // Espaço entre logo e menu
+  align-items: flex-start;
+  //align-items: center; // Centralização vertical
+}
+
+.container-fluid {
+    flex: 0,1; // Ocupará 2 unidades de espaço flex para balancear com o logo
+    background: $primary-color-1;
+    padding: 5px;
+  ul {
+    display: flex; // Itens lado a lado no nav
+    list-style: none;
+    padding: 0;
+    margin: 0 15px;
+    justify-content: flex-end; // Alinha o menu à direita
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+
+    li {
+      display: inline-block;
+      margin: 0 15px;
+
+      a {
+        text-decoration: none;
+        color: $primary-color-4;
+        font-weight: bold;
+
+        &:hover {
+          color: $primary-color-3;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: $primary-color-4;
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: $primary-color-2;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $primary-color-3;
+      border-radius: 5px;
+      margin-bottom: 10px;
+
+      &:focus {
+        border-color: $primary-color-1;
+        outline: none;
+      }
+    }
+  }
+
+  input[type="submit"] {
+    background: $primary-color-1;
+    color: $primary-color-4;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+      background: darken($primary-color-1, 10%);
+    }
+  }
+}
+
+// Responsividade
+@media (max-width: $breakpoint-medium) {
+
+    header {
+        flex-direction: column; // Altera o layout para coluna em ecrãs pequenos
+    }
+
+    nav ul {
+        display: block; // Menu passa a ocupar a largura total
+        flex-direction: column; // Coloca os itens do menu em coluna
+        text-align: center;
+      }
+
+      nav ul li {
+        margin: 10px 0; // Espaço entre itens em modo coluna
+      }
+
+  form {
+    padding: 10px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  textarea {
+    width: 100%;
+  }
+}
+
+// Layout Grid Flexível
+.container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  .item {
+    flex: 1 1 100%; // Ocupa 100% no ecrã pequeno
+
+    @media (min-width: $breakpoint-medium) {
+      flex: 1 1 50%; // 50% para tablets
+    }
+
+    @media (min-width: $breakpoint-large) {
+      flex: 1 1 25%; // 25% para desktops
+    }
+  }
+
+  // Ajuste para tablet
+  @media (min-width: $breakpoint-medium) {
+    width: 80%;
+  }
+
+  // Ajuste para desktop
+  @media (min-width: $breakpoint-large) {
+    width: 60%;
+  }
+}
