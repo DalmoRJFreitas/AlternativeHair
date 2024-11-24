@@ -79,7 +79,8 @@
               "buildTarget": "alternative_hair:build:production"
             },
             "development": {
-              "buildTarget": "alternative_hair:build:development"
+              "buildTarget": "alternative_hair:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
