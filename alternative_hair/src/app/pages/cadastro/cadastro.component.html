@@ -1,5 +1,6 @@
 <h2>Faça seu Cadastro e agende seu horário</h2>
-<form>
+<form id="agendamentoForm">
+
   <div class="form-group">
       <label for="Pname">Seu Nome</label><br>
       <input type="text" id="Pname" name="Pname" required><br>
@@ -43,7 +44,7 @@
   <input type="radio" id="casamento" name="datas_especiais" value="HTML">
   <label for="casamento">Casamento</label><br>
 
-  <input type="radio" id="formaturas" name="datas_especiais" value="">
+  <input type="radio" id="formaturas" name="datas_especiais" value="formaturas">
   <label for="formaturas">Formaturas</label><br>
 
   <input type="radio" id="debud" name="datas_especiais" value="Debutantes">
@@ -51,7 +52,7 @@
 
   <!-- Elemento textarea -->
   <h4>Fale Conosco!</h4><br>
-  <textarea name="message" rows="10" cols="40">Não encontrou o que gostaria? Deixe-nos uma mensagem e entraremos em contato.</textarea><br>
+    <textarea name="message" rows="10" cols="40" placeholder="Não encontrou o que gostaria? Deixe-nos uma mensagem e entraremos em contato."></textarea><br>
 
   <input type="submit" value="Enviar">
 </form>
@@ -62,12 +63,12 @@
   const socket = io('http://localhost:3000'); // Conecta ao WebSocket no backend
 
   // Seleciona o formulário
-  const form = document.querySelector('form');
+  const form = document.getElementById('agendamentoForm');
   const statusDiv = document.createElement('div'); // Div para mostrar status
   document.body.appendChild(statusDiv); // Adiciona a div ao final do corpo do documento
 
   // Conectar ao WebSocket para receber confirmações em tempo real
-  socket.on('/agendamento-confirmado', (data) => {
+  socket.on('agendamento-confirmado', (data) => {
     statusDiv.innerHTML += `<p>Agendamento confirmado para ${data.cliente} em ${data.data} às ${data.hora}!</p>`;
   });
 
@@ -81,6 +82,9 @@
     const telefone = document.getElementById('tel').value;
     const data = document.getElementById('data').value;
     const hora = document.getElementById('hora').value;
+    const servicos = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
+    const dataEspecial = document.querySelector('input[name="datas_especiais"]:checked')?.value || 'Nenhuma';
+    const mensagem = document.querySelector('textarea[name="message"]').value;
 
       // Validação básica para garantir que os campos não estão vazios
       if (!data || !hora) {
@@ -88,36 +92,24 @@
       return;
     }
 
-
-    // Captura os serviços selecionados
-    const servicos = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
-
-    // Captura o tipo de data especial
-    const dataEspecial = document.querySelector('input[name="datas_especiais"]:checked')?.value || 'Nenhuma';
-
-    // Captura a mensagem
-    const mensagem = document.querySelector('textarea[name="message"]').value;
-
     // Enviar requisição POST para verificar e confirmar
     try {
       const response = await fetch('http://localhost:3000/confirmar-agendamento', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ cliente, email, telefone, data, hora, servicos, dataEspecial, mensagem }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cliente, email, telefone, data, hora, servicos, dataEspecial, mensagem }),
       });
 
       const result = await response.json();
 
-      if (result.sucesso) {
+      if (response.ok) {
         statusDiv.innerHTML = `<p style="color: green;">${result.message}</p>`;
       } else {
-        statusDiv.innerHTML = `<p style="color: orange;">${result.message}</p>`;
+        statusDiv.innerHTML = `<p style="color: red;">Erro: ${result.message}</p>`;
       }
     } catch (error) {
-      console.error('Erro ao agendar:', error);
-      statusDiv.innerHTML = '<p style="color: red;">Erro ao processar seu agendamento. Tente novamente mais tarde.</p>';
+      console.error('Erro:', error);
+      statusDiv.innerHTML = `<p style="color: red;">Erro inesperado ao processar o agendamento.</p>`;
     }
   });
 </script>
